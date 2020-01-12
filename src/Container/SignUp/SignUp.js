@@ -14,7 +14,8 @@ class SignUp extends React.Component {
 			pwd_flag: false,
 			name: "",
 			email: "",
-			Password: ""
+			Password: "",
+			errors: {}
 		}
 
 	}
@@ -74,11 +75,11 @@ class SignUp extends React.Component {
 		if (str) {
 					return (<div><div className="form-group">
 							  <input type="text" className="form-control" id="name" placeholder="User Name" onChange={this.handleChange}/>
-							  <span className="red-text">{errors.name}</span>
+							  <span className="text-danger">{errors.name}</span>
 							</div>
 							<div className="form-group">
 							<input type="password" className="form-control" id="password" placeholder="Create Password..." onChange={this.handleChange}/>
-							<span className="red-text">{errors.password}</span>
+							<span className="text-danger">{errors.password}</span>
 							</div>
 							<div className="form-group">
 							<input type="submit" className="btn btn-success btn-block" value="Sign Up" />
@@ -104,7 +105,7 @@ class SignUp extends React.Component {
 						<form onSubmit={this.onSubmit} id="registerForm">
 							<div className="form-group">
 							  <input type="text" className="form-control" id="email" onChange={this.handleChange} placeholder="Email" />
-							  <span className="red-text">{errors.email}</span>
+							  <span className="text-danger">{errors.email}</span>
 							</div>
 							{ele(str)}
 						</form>

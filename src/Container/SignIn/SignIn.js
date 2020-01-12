@@ -2,13 +2,16 @@ import React from "react";
 import './SignIn.css';
 import {connect} from 'react-redux';
 import {loginUser} from '../../store/action/actions';
+import {googleUser} from '../../store/action/actions';
 
 class SignIn extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			email: '',
-			password: ''
+			password: '',
+			btnval: 'Login',
+			errors: {}
 		}
 		
 	}
@@ -16,12 +19,27 @@ class SignIn extends React.Component {
 	componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+    	
+    	const uname = this.props.auth.user.username
+    	
+      this.props.history.push(`/${uname}/dashboard`);
     }
+    // if (errors) {
+    // 	this.setS
+    // }
   }
     componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+    	
+    	const uname = nextProps.auth.user.username
+    	
+      this.props.history.push(`/${uname}/dashboard`);
+    }
+    if (nextProps.errors) {
+    	this.setState({
+    		btnval: 'Login',
+    		
+    	})
     }
 
     
@@ -32,17 +50,34 @@ class SignIn extends React.Component {
 			[e.target.id]: e.target.value
 		});
 	}
+	effectClick = e=>{
+		//e.preventDefault();
+		this.setState({
+			btnval: <span className="spinner-border spinner-border-sm"></span>
+		})
+		//const btnval = () => <h1>www</h1>
+		//e.target.value = btnval;
+		//console.log(e.target.value)
+	}
+	googleClick = e=>{
+		e.preventDefault();
+		this.props.googleUser();
+	}
 	handleSubmit = e=> {
 		e.preventDefault();
+		const username = this.state.email;
+		const password = this.state.password
 		const userData={
-			email: this.state.email,
-			password: this.state.password
+			username,
+			password
 		}
 		
 		this.props.loginUser(userData);
 	}
 	
 	render() {
+			
+		const {errors} = this.props;
 		const lists = [
 			"Tour",
 			"Pricing",
@@ -64,18 +99,25 @@ class SignIn extends React.Component {
 				
 				<div className="card">
 					<div className="card-body">
-						<h4 className="card-title">Sign up to Trello</h4>
+						<h4 className="card-title">Lonin to Trello</h4>
 						<form onSubmit={this.handleSubmit}>
 							<div className="form-group">
 							  <input type="text" className="form-control" id="email" placeholder="Email" onChange={this.onChange}/>
+							  <span className="text-danger">{errors.email}</span>
+							  <span className="text-danger">{errors.emailnotfound}</span>
+							  <span className="text-danger">{errors.messageEmail}</span>
+
 							</div>
 							<div className="form-group">
 							  <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.onChange}/>
+							  <span className="text-danger">{errors.password}</span>
+							  <span className="text-danger">{errors.passwordincorrect}</span>
+							  <span className="text-danger">{errors.messagePwd}</span>
 							</div>
 							
-							<input type="submit" className="btn btn-success btn-block" value="Login"/>
+							<button type="submit" className="btn btn-success btn-block" value='Login' onClick={this.effectClick}>{this.state.btnval}</button>
 							<p className="text-center">OR</p>
-							<button type="button" className="btn btn-outline-dark btn-block">Continue With Google</button>
+							<a href="http://localhost:3000/auth/google" type="button" className="btn btn-outline-dark btn-block">Continue With Google</a>
 						</form>
 						<hr />
 						<p><a href="#">Can't log in?</a>&nbsp;<a href="/signup">Sign up for an account</a></p>
@@ -139,11 +181,13 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = state=>({
-	auth: state.auth
+	auth: state.auth,
+	errors: state.errors
 });
 const mapDispatchToProps = dispatch=>{
 	return {
-		loginUser: (a)=>dispatch(loginUser(a))
+		loginUser: (a)=>dispatch(loginUser(a)),
+		googleUser: ()=>dispatch(googleUser())
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

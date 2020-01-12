@@ -18,34 +18,49 @@ export const getPageData = () => {
 	}
 }
 export const registerUser = (userData, history) => {
+	
 	return  dispatch => {
 
 	axios
-		.post('http://localhost:8000/api/users/register', userData)
+		.post('http://localhost:3000/api/users/register', userData)
+		// .then(()=>console.log('ok'))
 		.then(res=> history.push('/login'))
 		.catch(err=>
 			dispatch({
 				type:actionTypes.GET_ERRORS,
 				payload: err.response.data
-			}))
+			})
+			
+			)
 			//console.log(err.response.data))
 		//
 	}
 }
+export const googleUser = ()=> {
+	return dispatch=>{
+		axios.get('http://localhost:3000/auth/google');
+	}
+	
+}
 export const loginUser = (userData) => {
 	return dispatch => {
 	axios
-		.post('http://localhost:8000/api/users/login', userData)
+		.post('http://localhost:3000/api/users/login', userData)
 		.then(res=>{
 			const {token} = res.data;
 			localStorage.setItem("jwtToken", token);
 			setAuthToken(token);
 
 			const decoded = jwt_decode(token);
+			
 			dispatch(setCurrentUser(decoded));
 		})
 		.catch(err=>
-			console.log(err));
+			dispatch({
+				type:actionTypes.GET_ERRORS,
+				payload: err.response.data
+			})
+			);
 	}
 }
 export const setCurrentUser = decoded=> {
@@ -59,3 +74,4 @@ export const logoutUser = () =>dispatch=> {
 	setAuthToken(false);
 	dispatch(setCurrentUser({}));
 }
+

@@ -7,12 +7,14 @@ class Dashboard extends React.Component {
 		e.preventDefault();
 		this.props.logoutUser();
 	}
-	render() {
-			const {user} = this.props.auth;
 
+	render() {
+		
+			const {user} = this.props.auth;
+			
 		return(<div>
 			<h1>This is Dashboard Page.</h1>
-			<p>Hello <strong>{user.name}!</strong> Welcome to Dashboard.</p>
+			<p>Hello <strong>{user.username}!</strong> Welcome to Dashboard.</p>
 			<input type="button" className="btn btn-primary" value="Log Out" onClick={this.handleClick}/>
 			</div>
 			)

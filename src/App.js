@@ -6,22 +6,11 @@ import LogIn from "./Container/SignIn/SignIn";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Dashboard from './Container/Dashboard';
 import PrivateRoute from './Components/PrivateRoute';
-import setAuthToken from './utils/setAuthToken';
-//import jwt_decode from "jwt-decode";
+//import {connect} from 'react-redux';
 
-if (localStorage.jwtToken) {
-  const token = localStorage.jwtToken;
-  setAuthToken(token);
 
-  // const decoded = jwt_decode(token);
-
-  // store.dispatch(setCurrentUser(decoded));
-}
 class App extends React.Component {
-  constructor() {
-    super();
-
-  }
+  
 
 
   componentDidMount() {
@@ -35,11 +24,15 @@ class App extends React.Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
         <Switch>
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/:username/dashboard" component={Dashboard} />
         </Switch>
       </Router>
       )
   }
 }
+// const mapDispatchStateToProps = dispatch=>{
+//   setCurrentUser: (a)=>dispatch(setCurrentUser(a))
+// }
+// export default connect(null, mapDispatchStateToProps)(App);
 
 export default App;
