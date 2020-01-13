@@ -4,7 +4,7 @@ import LandingPage from "./LandingPage";
 import SignUp from "./Container/SignUp/SignUp";
 import LogIn from "./Container/SignIn/SignIn";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Dashboard from './Container/Dashboard';
+import Dashboard from './Dashboard';
 import PrivateRoute from './Components/PrivateRoute';
 //import {connect} from 'react-redux';
 
