@@ -1,5 +1,5 @@
 import React from "react";
-import './WorkWithTeam1.css';
+import "./WorkWithTeam1.css";
 
 export default class WorkTeamWith1 extends React.Component {
 	render() {

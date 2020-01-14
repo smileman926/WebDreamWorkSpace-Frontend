@@ -1,5 +1,5 @@
 import React from "react"
-import './WorkSmarter.css';
+import "./WorkSmarter.css";
 
 export default function WorkSmarter() {
 	return(

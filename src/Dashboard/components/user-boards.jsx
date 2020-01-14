@@ -1,9 +1,10 @@
-import React from 'react'
-import styled from 'styled-components';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-//import {StarBorder} from '@material-ui/icons/StarBorder';
-
-import BoardCard from './board-card';
+import React from "react"
+import styled from "styled-components";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+//import {StarBorder} from "@material-ui/icons/StarBorder";
+ import {addRecent, addStar} from "../../store/action/dashboardActions"
+import BoardCard from "./board-card";
+import {connect} from "react-redux";
 
 const CardOverview = styled.div`
     display: grid;
@@ -15,19 +16,40 @@ const CardOverview = styled.div`
     }
 `
 
-export default function UserBoard() {
+function UserBoard(props) {
+    
+        const {starred, recent, personal } = props.dashs
+         
+        const handleClick = (e)=>{
+            // e.preventDefault();
+            const txt = e.target.textContent
+             props.addRecent(txt);
+         }
+
     return (
         <div>
+            <div>
+
+                <div>
+                    <AccessTimeIcon />
+                    <span>Starred Viewed</span>
+                </div>
+                <CardOverview>
+                    { 
+                        starred.map((item,idx)=>{
+                        return <BoardCard key={idx} cardContent={item} func={props.addStar}/>
+                    })}
+                </CardOverview>
+            </div>
             <div>
                 <div>
                     <AccessTimeIcon />
                     <span>Recently Viewed</span>
                 </div>
                 <CardOverview>
-                    <BoardCard cardContent="New Test Automation Development Projecasdfasdfdsft" />
-                    <BoardCard cardContent="Research Project" />
-                    <BoardCard cardContent="Teamwork" />
-                    <BoardCard cardContent="Create new board" />
+                    {recent.map((item,idx)=>{
+                        return <BoardCard key={idx} cardContent={item} func={props.addStar}/>
+                    })}
                 </CardOverview>
             </div>
             <div>
@@ -36,10 +58,25 @@ export default function UserBoard() {
                     <span>Personal Boards</span>
                 </div>
                 <CardOverview>
-                    <BoardCard cardContent="Teamwork" />
-                    <BoardCard cardContent="Create New Board" />
+                    {personal.map((item,idx)=>{
+                        return <span onClick={handleClick}><BoardCard key={idx} cardContent={item} func={props.addStar}/></span>
+                    })}
                 </CardOverview>
             </div>
         </div>
     )
+    
 }
+// export default UserBoard;
+const mapStateToProps = state => {
+    return {
+        dashs: state.dashs
+    }   
+}
+ const mapDispatchToProps = dispatch=> {
+    return {
+        addRecent: (a)=>dispatch(addRecent(a)),
+        addStar: ()=>dispatch(addStar())
+    }
+ }
+ export default connect(mapStateToProps, mapDispatchToProps)(UserBoard);

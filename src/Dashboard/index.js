@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import {logoutUser} from "../store/action/actions";
-import Navigation from './Navigation';
-import Dashboard from './Dashboard';
+import Navigation from "./Navigation";
+import Dashboard from "./Dashboard";
 
 class Main extends React.Component {
 	handleClick = e=>{

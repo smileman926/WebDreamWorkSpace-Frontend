@@ -4,7 +4,7 @@ import "./TrelloWay.css";
 
 export default function TrelloWays(props) {
 	const {imgUrl, header, caption, btnText, btnUrl} = props.data;
-// style={{'display':'grid', 'grid-template-columns': '1fr 1fr 1fr', 'grid-gap': 50}}
+// style={{"display":"grid", "grid-template-columns": "1fr 1fr 1fr", "grid-gap": 50}}
 	const ele = (str) => {
 		if (str) {
 					return (<p><a className="btn btn-secondary btn-wrap px-3" href="teams.html">{btnText}</a></p>)

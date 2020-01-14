@@ -1,8 +1,8 @@
 import React from "react";
-import './Collaborative.scss';
-import { makeStyles } from '@material-ui/core/styles';
+import "./Collaborative.scss";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from '@material-ui/core/Grid';
+import Grid from "@material-ui/core/Grid";
 
 
 
@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
   },
 
    bg: {
-    backgroundColor: '#1976d2',
-    color: 'white'
+    backgroundColor: "#1976d2",
+    color: "white"
   }
 }));
 
@@ -28,7 +28,7 @@ export default function Collaborative(props) {
 		<div className={classes.bg} id={props.id}>
 			<div className="collaborative">
 			<Grid container spacing={3}>
-		        <Grid item xs={12} sm={5} style={{textAlign:'left'}}>
+		        <Grid item xs={12} sm={5} style={{textAlign:"left"}}>
 		          	<h1 className="title text-center">{Title}</h1>
 					<p className="subtitle text-center">{Text}</p>
 		        </Grid>

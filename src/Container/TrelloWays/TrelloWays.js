@@ -1,7 +1,7 @@
 import React from "react";
 
 import TrelloWay from "./TrelloWay";
-// style={{'display':'grid', 'grid-template-columns': '1fr 1fr 1fr', 'grid-gap': 50}}
+// style={{"display":"grid", "grid-template-columns": "1fr 1fr 1fr", "grid-gap": 50}}
 
 
 

@@ -5,7 +5,7 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#42548e), to(#6b668c));
     background: linear-gradient(180deg, #42548e 0%, #6b668c 100%);
     border-radius: 12px;
-    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#42548E', endColorstr='#6B668C', GradientType=1);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#42548E", endColorstr="#6B668C", GradientType=1);*/
 
 }
 #work-smarter {

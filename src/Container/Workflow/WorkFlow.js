@@ -1,8 +1,8 @@
 import React from "react";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from '@material-ui/core/Grid';
+import Grid from "@material-ui/core/Grid";
 
 
 const useStyles = makeStyles(theme => ({
@@ -11,8 +11,8 @@ const useStyles = makeStyles(theme => ({
   },
 
    bg: {
-    backgroundColor: '#1976d2',
-    color: 'white'
+    backgroundColor: "#1976d2",
+    color: "white"
   }
 }));
 

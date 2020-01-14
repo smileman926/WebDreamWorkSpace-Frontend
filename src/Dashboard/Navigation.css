@@ -83,3 +83,13 @@
 .circle {
 	border-radius: 50%;
 }
+.dropdown-toggle:after {
+	display: none;
+}
+.dropdown-menu {
+	box-sizing: border-box;
+	position: fixed;
+	right: 0;
+	max-width: 350px;
+	width: 350px;
+}

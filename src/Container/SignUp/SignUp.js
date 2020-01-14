@@ -1,10 +1,10 @@
 import React from "react";
-import './SignUp.css';
-import isEmail from 'validator/lib/isEmail';
-//import {getPageData} from '../../store/action/actions';
-// import ReactPasswordStrength from 'react-password-strength';
-import {connect} from 'react-redux';
-import {registerUser} from '../../store/action/actions';
+import "./SignUp.css";
+import isEmail from "validator/lib/isEmail";
+//import {getPageData} from "../../store/action/actions";
+// import ReactPasswordStrength from "react-password-strength";
+import {connect} from "react-redux";
+import {registerUser} from "../../store/action/actions";
 
 class SignUp extends React.Component {
 	constructor() {
@@ -88,7 +88,7 @@ class SignUp extends React.Component {
 				}
 				else {
 					return(<div>
-					<p className="card-text">By signing up, you confirm that you've read and accepted our <a href="#" className="card-link">Terms of Service</a> and <a href="#" className="card-link">Privacy Policy.</a> </p>
+					<p className="card-text">By signing up, you confirm that you"ve read and accepted our <a href="#" className="card-link">Terms of Service</a> and <a href="#" className="card-link">Privacy Policy.</a> </p>
 					<input type="button" className="btn btn-success btn-block" value="Continue" onClick={this.handleClick}  disabled={!disable}/>
 					</div>)
 				}

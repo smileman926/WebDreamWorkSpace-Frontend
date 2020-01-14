@@ -1,16 +1,16 @@
 import React from "react";
-import './SignIn.css';
-import {connect} from 'react-redux';
-import {loginUser} from '../../store/action/actions';
-import {googleUser} from '../../store/action/actions';
+import "./SignIn.css";
+import {connect} from "react-redux";
+import {loginUser} from "../../store/action/actions";
+import {googleUser} from "../../store/action/actions";
 
 class SignIn extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			email: '',
-			password: '',
-			btnval: 'Login',
+			email: "",
+			password: "",
+			btnval: "Login",
 			errors: {}
 		}
 		
@@ -37,7 +37,7 @@ class SignIn extends React.Component {
     }
     if (nextProps.errors) {
     	this.setState({
-    		btnval: 'Login',
+    		btnval: "Login",
     		
     	})
     }
@@ -115,12 +115,12 @@ class SignIn extends React.Component {
 							  <span className="text-danger">{errors.messagePwd}</span>
 							</div>
 							
-							<button type="submit" className="btn btn-success btn-block" value='Login' onClick={this.effectClick}>{this.state.btnval}</button>
+							<button type="submit" className="btn btn-success btn-block" value="Login" onClick={this.effectClick}>{this.state.btnval}</button>
 							<p className="text-center">OR</p>
 							<a href="http://localhost:3000/auth/google" type="button" className="btn btn-outline-dark btn-block">Continue With Google</a>
 						</form>
 						<hr />
-						<p><a href="#">Can't log in?</a>&nbsp;<a href="/signup">Sign up for an account</a></p>
+						<p><a href="#">Can"t log in?</a>&nbsp;<a href="/signup">Sign up for an account</a></p>
 
 					</div>
 

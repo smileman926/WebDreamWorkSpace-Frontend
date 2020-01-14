@@ -1,9 +1,9 @@
-import React from 'react';
-import SideBar from './sideBar';
-import {connect} from 'react-redux'
-import DashboardSidebar from './components/sidebar-container';
-import UserBoard from './components/user-boards';
-import './dashboard.css'
+import React from "react";
+import SideBar from "./sideBar";
+import {connect} from "react-redux"
+import DashboardSidebar from "./components/sidebar-container";
+import UserBoard from "./components/user-boards";
+import "./dashboard.css"
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -15,11 +15,11 @@ class Dashboard extends React.Component {
 		return(
 			<div>
 			<SideBar open={open} />
-				<div className='dashboard-container'>
-			      <div className='dashboard-sidebar'>
+				<div className="dashboard-container">
+			      <div className="dashboard-sidebar">
 			        <DashboardSidebar />
 			      </div>
-			      <div className='all-board'>
+			      <div className="all-board">
 			        <UserBoard />
 			      </div>
 			    </div>

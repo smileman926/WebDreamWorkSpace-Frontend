@@ -1,6 +1,7 @@
-import React from 'react'
-import styled from 'styled-components';
-import {StarBorder} from '@material-ui/icons/StarBorder';
+import React from "react"
+import styled from "styled-components";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import "./board-card.css";
 
 const Card = styled.div`
     position: relative;
@@ -8,10 +9,11 @@ const Card = styled.div`
     height: 90px;
     background-color: green;
     text-align: center;
+    overflow: hidden;
     &:hover {
         opacity: .8;
     }
-    &:hover .icon-star {
+    &:hover .user-board-star {
         right: 0;
     }
 `
@@ -22,7 +24,7 @@ const CardTitle = styled.div`
     font-weight: 700;
     color: white;
 `
-const IconStar = styled.p`
+const IconStar = styled.div`
     display: contents;
     position: absolute;
     right: -35px;
@@ -34,11 +36,19 @@ const IconStar = styled.p`
     }
 `
 
-export default function BoardCard({isTemplate, cardContent}) {
+export default function BoardCard({func, cardContent}) {
+    const isLike = false
+    const txt = cardContent;
+    const handleClick = (txt)=> {
+      const  isL = !isLike
+        func(txt, isL);
+        console.log(isL)
+    }
+
     return (
         <Card>
             <CardTitle>{cardContent}</CardTitle>
-            <IconStar>T</IconStar>
+            <span className="user-board-star" onClick={handleClick}><StarBorderIcon/></span>
         </Card>
     )
 }

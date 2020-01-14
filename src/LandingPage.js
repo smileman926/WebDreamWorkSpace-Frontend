@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import LoadingBar from './Components/WithSpinner/with-spinner';
+import LoadingBar from "./Components/WithSpinner/with-spinner";
 import Navbar from "./Components/Navbar/Navbar";
 import Collaborative from "./Container/Collaborative/Collaborative";
 //import WorkWithTeam from "./Container/WorkWithTeam/WorkWithTeam";
@@ -14,7 +14,7 @@ import Footer from "./Container/Footer/Footer";
 import SeeCarousel from "./Container/SeeCarousel/SeeCarousel";
 import "./App.css";
 import {connect} from "react-redux";
-import {getPageData} from './store/action/actions';
+import {getPageData} from "./store/action/actions";
 
 
 class App extends React.Component {
@@ -31,7 +31,7 @@ class App extends React.Component {
   componentDidMount() {
 
     this.props.getPageDatas();
-    document.addEventListener('scroll', ()=>{
+    document.addEventListener("scroll", ()=>{
       const h = window.scrollY;
       if (h>80) {
         this.setState({

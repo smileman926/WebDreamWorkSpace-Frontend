@@ -1,5 +1,5 @@
 import React from "react";
-import './Information.css';
+import "./Information.css";
 
 export default function Information(props) {
 	const { Title, Text, WorkFlow } = props.data;

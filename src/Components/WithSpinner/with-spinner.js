@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-// import './with-spinner.styles.scss';
+import CircularProgress from "@material-ui/core/CircularProgress";
+// import "./with-spinner.styles.scss";
 import "./center.css";
 
 const LoadingBar = () => {
