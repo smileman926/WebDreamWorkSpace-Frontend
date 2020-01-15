@@ -12,36 +12,40 @@ export const addRecent = (txt) => {
 		payload: txt
 	}
 }
-export const addStar = (txt,isLike) =>{
-
+export const addStar = (txt,isLike) =>dispatch=>{
+	console.log(isLike)
 	if (isLike) {
-		return dispatch=>{
-			dispatch(removeStar(txt))
-			dispatch(addRecent(txt))
-		}
-		
+
+		return (
+
+			dispatch({
+				type: actionTypes.REMOVE_STAR,
+				payload: txt
+			}),
+			dispatch({
+				type: actionTypes.ADD_RECENT,
+				payload: txt
+			})
+		)		
 	}
 	else {
-		return dispatch=> {
+		return (
 		dispatch({
 			type: actionTypes.ADD_STAR,
 			payload: txt
+		}),
+		dispatch({
+			type: actionTypes.REMOVE_RECENT,
+			payload: txt
 		})
-		dispatch(removeRecent(txt))
 		
-		}
+		)
 	}
 	
 }
 export const removeRecent = (txt)=>{
 	return {
 		type: actionTypes.REMOVE_RECENT,
-		payload: txt
-	}
-}
-export const removeStar = (txt)=> {
-	return {
-		type: actionTypes.REMOVE_STAR,
 		payload: txt
 	}
 }

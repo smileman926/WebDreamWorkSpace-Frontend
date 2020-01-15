@@ -3,6 +3,7 @@ import "./SignIn.css";
 import {connect} from "react-redux";
 import {loginUser} from "../../store/action/actions";
 import {googleUser} from "../../store/action/actions";
+import jwt from "jsonwebtoken";
 
 class SignIn extends React.Component {
 	constructor() {
@@ -21,8 +22,18 @@ class SignIn extends React.Component {
     if (this.props.auth.isAuthenticated) {
     	
     	const uname = this.props.auth.user.username
+    	const tokenUrl = jwt.sign(uname, "secret")
+   //  	jwt.sign(
+			// payload,
+			// "secret",
+			// (err,token)=>{
+			// res.json({
+			// 	success: true,
+			// 	token: "Bearer " + token
+			// 	});
+			// });
     	
-      this.props.history.push(`/${uname}/dashboard`);
+      this.props.history.push(`/${tokenUrl}/dashboard`);
     }
     // if (errors) {
     // 	this.setS

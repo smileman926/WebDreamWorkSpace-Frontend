@@ -20,7 +20,8 @@ class Main extends React.Component {
 				<Navigation userFirstLetter={userFirstLetter}/>
 				
 				<Dashboard user={user} open={open_flag}/>
-				
+				<p>Hello <strong>{user.username}!</strong> Welcome to Dashboard.</p>
+				<input type="button" className="btn btn-primary" value="Log Out" onClick={this.handleClick}/>
 			</div>
 			)
 	}

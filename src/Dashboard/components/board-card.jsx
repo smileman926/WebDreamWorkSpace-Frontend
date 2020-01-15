@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import StarIcon from "@material-ui/icons/Star";
+
 import "./board-card.css";
 
 const Card = styled.div`
@@ -36,19 +38,24 @@ const IconStar = styled.div`
     }
 `
 
-export default function BoardCard({func, cardContent}) {
-    const isLike = false
-    const txt = cardContent;
-    const handleClick = (txt)=> {
-      const  isL = !isLike
-        func(txt, isL);
-        console.log(isL)
+export default function BoardCard(props) {
+    
+    // const isLike = false
+    const [Like,setLike]=React.useState()
+    const str = props.cardContent;
+    const handleClick = (e)=> {
+        e.preventDefault()
+        setLike(!Like)  
+        props.func(str, Like);
+        //console.log(Like)
     }
 
     return (
+
         <Card>
-            <CardTitle>{cardContent}</CardTitle>
-            <span className="user-board-star" onClick={handleClick}><StarBorderIcon/></span>
+            <CardTitle>{props.cardContent}</CardTitle>
+            <span className="user-board-star" onClick={handleClick}>{Like ? <StarIcon/> : <StarBorderIcon />}</span>
         </Card>
     )
+
 }

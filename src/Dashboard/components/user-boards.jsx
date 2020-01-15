@@ -22,8 +22,13 @@ function UserBoard(props) {
          
         const handleClick = (e)=>{
             // e.preventDefault();
-            const txt = e.target.textContent
-             props.addRecent(txt);
+            console.log(this)
+            console.log(e.target)
+            if (e.target == this) {
+                const txt = e.target.textContent
+                props.addRecent(txt);
+            }
+
          }
 
     return (
@@ -35,10 +40,13 @@ function UserBoard(props) {
                     <span>Starred Viewed</span>
                 </div>
                 <CardOverview>
-                    { 
-                        starred.map((item,idx)=>{
+                    {  (starred.length==0) 
+                        ? <h3>NO Star</h3>
+                        :starred.map((item,idx)=>{
                         return <BoardCard key={idx} cardContent={item} func={props.addStar}/>
-                    })}
+                    })
+
+                        }
                 </CardOverview>
             </div>
             <div>
@@ -47,7 +55,10 @@ function UserBoard(props) {
                     <span>Recently Viewed</span>
                 </div>
                 <CardOverview>
-                    {recent.map((item,idx)=>{
+                    {
+                        (recent.length==0)
+                        ? <h3>NO Recent</h3>
+                        :recent.map((item,idx)=>{
                         return <BoardCard key={idx} cardContent={item} func={props.addStar}/>
                     })}
                 </CardOverview>
@@ -59,7 +70,7 @@ function UserBoard(props) {
                 </div>
                 <CardOverview>
                     {personal.map((item,idx)=>{
-                        return <span onClick={handleClick}><BoardCard key={idx} cardContent={item} func={props.addStar}/></span>
+                        return <span className="span-board" onClick={handleClick}><BoardCard key={idx} cardContent={item} func={props.addStar}/></span>
                     })}
                 </CardOverview>
             </div>
@@ -76,7 +87,7 @@ const mapStateToProps = state => {
  const mapDispatchToProps = dispatch=> {
     return {
         addRecent: (a)=>dispatch(addRecent(a)),
-        addStar: ()=>dispatch(addStar())
+        addStar: (a,b)=>dispatch(addStar(a,b))
     }
  }
  export default connect(mapStateToProps, mapDispatchToProps)(UserBoard);

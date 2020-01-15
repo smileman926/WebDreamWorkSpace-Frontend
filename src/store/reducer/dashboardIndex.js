@@ -21,6 +21,7 @@ export default function dashReducer(state=initState, action) {
 				recent: [...state.recent, action.payload]
 				}
 			}
+			else { return state }
 		case actionTypes.REMOVE_RECENT:
 			if (state.recent.indexOf(action.payload)!==-1) {
 				const new_recent = state.recent.filter(item=>item!=action.payload)
@@ -39,7 +40,9 @@ export default function dashReducer(state=initState, action) {
 			}
 		case actionTypes.REMOVE_STAR:
 			if (state.starred.indexOf(action.payload)!==-1) {
-				const new_recent = state.recent.filter(item=>item!=action.payload)
+				const new_recent = state.starred.filter(item=>item!=action.payload)
+				console.log('new_recent')
+				console.log(new_recent)
 				return {
 				...state,
 				recent: [...new_recent]

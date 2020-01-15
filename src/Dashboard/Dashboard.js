@@ -4,6 +4,7 @@ import {connect} from "react-redux"
 import DashboardSidebar from "./components/sidebar-container";
 import UserBoard from "./components/user-boards";
 import "./dashboard.css"
+import jwt from "jsonwebtoken"
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -12,6 +13,11 @@ class Dashboard extends React.Component {
 	render() {
 		const {user} = this.props;
 		const {open} = this.props;
+		const u='u'
+		const U = 'U'
+		console.log(jwt.sign('u', "secret"))
+    	console.log(jwt.sign('U', "secret"))
+    	console.log(jwt.sign('u', "secret"))
 		return(
 			<div>
 			<SideBar open={open} />
@@ -23,8 +29,7 @@ class Dashboard extends React.Component {
 			        <UserBoard />
 			      </div>
 			    </div>
-			    <p>Hello <strong>{user.username}!</strong> Welcome to Dashboard.</p>
-				<input type="button" className="btn btn-primary" value="Log Out" onClick={this.handleClick}/>
+			    
 			</div>
 			)
 	}
