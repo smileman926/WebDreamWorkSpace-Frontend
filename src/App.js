@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LandingPage from "./LandingPage";
 import SignUp from "./Container/SignUp/SignUp";
@@ -8,7 +8,8 @@ import Dashboard from "./Dashboard";
 import PrivateRoute from "./Components/PrivateRoute";
 //import {connect} from "react-redux";
 
-
+// const UserBoard = lazy(() => import('./components/user-boards'))
+// const TemplateBoards = lazy(() => import('./components/template-boards'))
 class App extends React.Component {
   
 
@@ -24,7 +25,8 @@ class App extends React.Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
         <Switch>
-          <PrivateRoute exact path="/:username/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/:username/:board" component={Dashboard} />
+          
         </Switch>
       </Router>
       )

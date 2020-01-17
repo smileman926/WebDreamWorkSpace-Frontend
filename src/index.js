@@ -14,8 +14,23 @@ import {setCurrentUser} from "./store/action/actions";
 import logger from "redux-logger"
 import { composeWithDevTools } from "redux-devtools-extension"
 
+import { ApolloClient } from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk,logger)));
+
+const httpLink = createHttpLink({
+	uri: 'http://localhost:3000/graphql'
+});
+
+const cache = new InMemoryCache();
+
+const client = new ApolloClient({
+	link: httpLink,
+	cache
+});
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -26,11 +41,13 @@ if (localStorage.jwtToken) {
 	store.dispatch(setCurrentUser(decoded));   
 }
 const app = (
+	<ApolloProvider client={client}>
 	<Provider store={store}>
 		<Router>
 			<App />
 		</Router>
 	</Provider>
+	</ApolloProvider>
 	)
 ReactDOM.render(app, document.getElementById("root"));
 //registerServiceWorker();

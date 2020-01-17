@@ -2,13 +2,9 @@ import * as actionTypes from "../action/actionTypes";
 
 const initState = {
 	toggleSidebar: false,
-	boardCard:[
-		{
-			title: '',
-			recent: false,
-			star: false,
-		}
-	]
+	starred:[],
+	recent: [],
+	personal:[]
 
 
 	}

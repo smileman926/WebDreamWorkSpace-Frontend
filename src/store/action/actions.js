@@ -2,6 +2,7 @@ import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../../utils/setAuthToken";
+import jwt from "jsonwebtoken";
 
 
 export const getPageData = () => {
@@ -52,6 +53,9 @@ export const loginUser = (userData) => {
 			setAuthToken(token);
 
 			const decoded = jwt_decode(token);
+			
+    		const tokenUrl = jwt.sign(decoded.username, "secret")
+			localStorage.setItem("tokenUrl", tokenUrl);
 			
 			dispatch(setCurrentUser(decoded));
 		})

@@ -21,8 +21,8 @@ class SignIn extends React.Component {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
     	
-    	const uname = this.props.auth.user.username
-    	const tokenUrl = jwt.sign(uname, "secret")
+    	
+    	const tokenUrl = localStorage.getItem("tokenUrl")
    //  	jwt.sign(
 			// payload,
 			// "secret",
@@ -42,9 +42,9 @@ class SignIn extends React.Component {
     componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
     	
-    	const uname = nextProps.auth.user.username
-    	
-      this.props.history.push(`/${uname}/dashboard`);
+    	//const uname = nextProps.auth.user.username
+    	const tokenUrl = localStorage.getItem("tokenUrl")
+      this.props.history.push(`/${tokenUrl}/dashboard`);
     }
     if (nextProps.errors) {
     	this.setState({

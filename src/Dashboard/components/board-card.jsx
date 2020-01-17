@@ -1,7 +1,9 @@
-import React from "react"
+import React, {useState} from "react"
 import styled from "styled-components";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import StarIcon from "@material-ui/icons/Star";
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import "./board-card.css";
 
@@ -37,24 +39,26 @@ const IconStar = styled.div`
         right: 0;
     }
 `
-
-export default function BoardCard(props) {
-    
-    // const isLike = false
-    const [Like,setLike]=React.useState()
-    const str = props.cardContent;
-    const handleClick = (e)=> {
-        e.preventDefault()
-        setLike(!Like)  
-        props.func(str, Like);
-        //console.log(Like)
+const POST_MUTATION = gql`
+  mutation postMutation($id: String!) {
+    addStar(id: $id) {
+      
+      isStarred
     }
+  }
+`
+export default function BoardCard({_id, title, backgroundImageUrl, isStarred}) {
+    
+    
 
     return (
 
         <Card>
-            <CardTitle>{props.cardContent}</CardTitle>
-            <span className="user-board-star" onClick={handleClick}>{Like ? <StarIcon/> : <StarBorderIcon />}</span>
+            <CardTitle>{title}</CardTitle>
+            <Mutation mutation={POST_MUTATION} variables={{ _id }}>
+              {postMutation => <span className="user-board-star" onClick={postMutation}>{isStarred ? <StarIcon/> : <StarBorderIcon />}</span>}
+            </Mutation>
+            
         </Card>
     )
 
