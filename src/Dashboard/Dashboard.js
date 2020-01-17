@@ -13,11 +13,7 @@ class Dashboard extends React.Component {
 	render() {
 		const {user} = this.props;
 		const {open} = this.props;
-		const u='u'
-		const U = 'U'
-		console.log(jwt.sign('u', "secret"))
-    	console.log(jwt.sign('U', "secret"))
-    	console.log(jwt.sign('u', "secret"))
+		
 		return(
 			<div>
 			<SideBar open={open} />

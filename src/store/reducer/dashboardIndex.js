@@ -2,10 +2,18 @@ import * as actionTypes from "../action/actionTypes";
 
 const initState = {
 	toggleSidebar: false,
-	starred: [],
-	recent: [],
-	personal: ["Welcome to Trello"]
-}
+	boardCard:[
+		{
+			title: '',
+			recent: false,
+			star: false,
+		}
+	]
+
+
+	}
+
+ 
 
 export default function dashReducer(state=initState, action) {
 	switch (action.type) {
