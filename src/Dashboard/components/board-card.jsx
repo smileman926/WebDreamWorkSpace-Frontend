@@ -11,7 +11,6 @@ const Card = styled.div`
     position: relative;
     border-radius: 4px;
     height: 90px;
-    background-color: green;
     text-align: center;
     overflow: hidden;
     &:hover {
@@ -40,23 +39,23 @@ const IconStar = styled.div`
     }
 `
 const POST_MUTATION = gql`
-  mutation postMutation($id: String!) {
-    addStar(id: $id) {
-      
+  mutation PostMutation($id: String!, $star: Boolean!) {
+    addStar(id: $id, star: $star) {
+      _id
       isStarred
     }
   }
 `
 export default function BoardCard({_id, title, backgroundImageUrl, isStarred}) {
     
-    
-
+    const id = _id;
+    const star = isStarred;
     return (
 
-        <Card>
+        <Card style={{backgroundImage: `url(${backgroundImageUrl})`}}>
             <CardTitle>{title}</CardTitle>
-            <Mutation mutation={POST_MUTATION} variables={{ _id }}>
-              {postMutation => <span className="user-board-star" onClick={postMutation}>{isStarred ? <StarIcon/> : <StarBorderIcon />}</span>}
+            <Mutation mutation={POST_MUTATION} variables={{id, star}}>
+              {postMutation => <span className="user-board-star" onClick={postMutation}>{isStarred ? <StarIcon style={{ borderColor: 'yellow' }}/> : <StarBorderIcon />}</span>}
             </Mutation>
             
         </Card>
