@@ -22,7 +22,7 @@ class Main extends React.Component {
 				<Navigation userFirstLetter={userFirstLetter}/>
 				<Switch>
 				<Route path="/"><Dashboard user={user} open={open_flag}/></Route>
-				<Route exact path="/ttt/ttt/ttt"><TestPage /></Route>
+				<Route path="/ttt/ttt"><TestPage /></Route>
 				</Switch>
 				<p>Hello <strong>{user.username}!</strong> Welcome to Dashboard.</p>
 				<input type="button" className="btn btn-primary" value="Log Out" onClick={this.handleClick}/>
