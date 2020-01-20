@@ -4,8 +4,10 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import StarIcon from "@material-ui/icons/Star";
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-
+import {connect} from "react-redux";
+import {addInfo} from "../../store/action/actions";
 import "./board-card.css";
+import {Link} from "react-router-dom";
 
 const Card = styled.div`
     position: relative;
@@ -39,26 +41,67 @@ const IconStar = styled.div`
     }
 `
 const POST_MUTATION = gql`
-  mutation PostMutation($id: String!, $star: Boolean!) {
-    addStar(id: $id, star: $star) {
+  mutation PostMutation($_id: String!, $isStarred: Boolean!) {
+    addStar(id: $_id, star: $isStarred) {
       _id
       isStarred
     }
   }
 `
-export default function BoardCard({_id, title, backgroundImageUrl, isStarred}) {
+
+function BoardCard(props) {
+    //console.log(props)
+    // const info = {
+    //     id: _id,
+    //     title: title,
+    //     backgroundImageUrl: backgroundImageUrl,
+    //     isStarred: isStarred
+    // }
+    const {_id, backgroundImageUrl, isStarred, title} = props.info
+    const handleStar = e=> {
+        e.preventDefault();
+    }
+
+    const handleCard = ()=> {
+        
+        props.addInfo(props.info)
+        
+
+    }
     
-    const id = _id;
-    const star = isStarred;
     return (
 
-        <Card style={{backgroundImage: `url(${backgroundImageUrl})`}}>
+        
+        <Card style={{backgroundImage: `url(${backgroundImageUrl})`, backgroundSize: 'cover'}} onClick={handleCard}>
             <CardTitle>{title}</CardTitle>
-            <Mutation mutation={POST_MUTATION} variables={{id, star}}>
-              {postMutation => <span className="user-board-star" onClick={postMutation}>{isStarred ? <StarIcon style={{ borderColor: 'yellow' }}/> : <StarBorderIcon />}</span>}
+            <Mutation mutation={POST_MUTATION} variables={{_id, isStarred}}>
+              {postMutation => isStarred 
+                ? <span className="user-board-star-check" onClick={postMutation} ><StarBorderIcon style={{ color: 'yellow' }} onClick={handleStar}/></span> 
+                : <span className="user-board-star" onClick={postMutation} ><StarBorderIcon onClick={handleStar}/></span>}
             </Mutation>
             
         </Card>
+       
     )
 
 }
+
+const mapStateToProps = (state, ownProps) => {
+    const info = {
+        _id: ownProps._id,
+        title: ownProps.title,
+        backgroundImageUrl: ownProps.backgroundImageUrl,
+        isStarred: ownProps.isStarred
+    }
+    return {
+        auth: state.auth,
+        info: info
+    }   
+}
+ const mapDispatchToProps = dispatch=> {
+    return {
+        addInfo: (a)=>dispatch(addInfo(a))
+       
+    }
+ }
+ export default connect(mapStateToProps, mapDispatchToProps)(BoardCard);

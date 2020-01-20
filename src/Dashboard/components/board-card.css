@@ -4,3 +4,8 @@
 	bottom: 0;
 	transition: right .3s;
 }
+.user-board-star-check {
+	position:absolute;
+	right: 0;
+	bottom: 0;
+}

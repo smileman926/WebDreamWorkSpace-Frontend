@@ -18,6 +18,7 @@ import { MDBIcon } from 'mdbreact';
 import Radio from '@material-ui/core/Radio';
 import { Mutation } from 'react-apollo';
 import { Link } from "react-router-dom";
+// import {addInfo} from "../../store/action/actions"
 
 const CardOverview = styled.div`
     display: grid;
@@ -244,7 +245,7 @@ function UserBoard(props) {
                                         </div>
                                         <MDBModalFooter className="board-modal-footer">
                                             <Mutation mutation={POST_MUTATION} variables={{modalTitle, selectedValue}}>
-                                              {postMutation => <Link to={`/${tokenUrl}/dashboard`}><button className="btn btn-primary create-btn" onClick={postMutation} disabled={btnClass}>Create Board</button></Link>}
+                                              {postMutation => <Link to="/main"><button className="btn btn-primary create-btn" onClick={postMutation} disabled={btnClass}>Create Board</button></Link>}
                                             </Mutation>
                                             
                                                 

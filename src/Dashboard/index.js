@@ -4,7 +4,7 @@ import {logoutUser} from "../store/action/actions";
 import Navigation from "./Navigation";
 import Dashboard from "./Dashboard";
 import { Switch, Link, Route } from "react-router-dom";
-import TestPage from "./TestPage";
+// import TestPage from "./TestPage";
 
 class Main extends React.Component {
 	handleClick = e=>{
@@ -22,7 +22,7 @@ class Main extends React.Component {
 				<Navigation userFirstLetter={userFirstLetter}/>
 				<Switch>
 				<Route path="/"><Dashboard user={user} open={open_flag}/></Route>
-				<Route path="/ttt/ttt"><TestPage /></Route>
+				
 				</Switch>
 				<p>Hello <strong>{user.username}!</strong> Welcome to Dashboard.</p>
 				<input type="button" className="btn btn-primary" value="Log Out" onClick={this.handleClick}/>

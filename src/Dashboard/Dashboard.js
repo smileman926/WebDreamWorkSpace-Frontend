@@ -24,6 +24,7 @@ class Dashboard extends React.Component {
                              'Support', 'Team Management'];
 		return(
 			<div>
+				
 				<SideBar open={open} />
 				<div className="dashboard-container">
 			      <div className="dashboard-sidebar">

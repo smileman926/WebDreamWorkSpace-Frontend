@@ -78,4 +78,11 @@ export const logoutUser = () =>dispatch=> {
 	setAuthToken(false);
 	dispatch(setCurrentUser({}));
 }
+export const addInfo = info=> {
+	
+	return {
+		type: actionTypes.ADD_INFO,
+		payload: info
+	}
+}
 

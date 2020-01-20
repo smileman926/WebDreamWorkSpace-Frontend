@@ -6,6 +6,8 @@ import LogIn from "./Container/SignIn/SignIn";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Dashboard from "./Dashboard";
 import PrivateRoute from "./Components/PrivateRoute";
+import TestPage from "./Dashboard/TestPage";
+import MainBoard from "./MainBoard";
 //import {connect} from "react-redux";
 
 // const UserBoard = lazy(() => import('./components/user-boards'))
@@ -26,7 +28,7 @@ class App extends React.Component {
         <Route exact path="/login" component={LogIn} />
         <Switch>
           <PrivateRoute exact path="/:username/:board" component={Dashboard} />
-          
+          <PrivateRoute exact path="/main" component={MainBoard} />
         </Switch>
       </Router>
       )
