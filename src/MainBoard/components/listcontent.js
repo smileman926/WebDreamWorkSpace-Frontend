@@ -2,18 +2,19 @@ import React, {Component} from "react";
 import {render} from "react-dom";
 import { connect } from "react-redux";
 import { MDBIcon } from "mdbreact";
-import arrayMove from "array-move";
+// import arrayMove from "array-move";
 
 import AddContent from "./addcontent";
 
 
-class ListContent extends Component {
+export default class ListContent extends Component {
 	constructor(props){
 		super(props);
 	}
 
 	render() {
-
+		console.log("========")
+		
 		return (
 
 		 	<div className="list_content">
@@ -29,5 +30,7 @@ class ListContent extends Component {
 	}
 }
 
-
-export default connect(null,null)(ListContent);
+// const mapStateToProps = (state,ownProps)=> ({
+// 	notes: state.dashs.boardContents,
+// 	title: ownProps.title
+// })

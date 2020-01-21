@@ -3,21 +3,9 @@ import {render} from 'react-dom';
 import { MDBIcon } from "mdbreact";
 import { connect } from "react-redux";
 
-import addlist from "../action/addlist";
-import changecollection from "../action/changecollection";
+import {addList} from "../../store/action/actions";
+// import changecollection from "../action/changecollection";
 
-const mapStateToProps = state => ({
-	boardId: state.userboard.boardId,
-	boardTitle: state.userboard.boardTitle,
-	boardImgurl: state.userboard.boardImgurl,
-	boardColor: state.userboard.boardColor,
-	boardContents: state.userboard.boardContents
-});
-
-const mapDispatchProps = (dispatch) => ({
-	addlist: (title) => dispatch(addlist(title)),
-	changecollection: (collection,id) => dispatch(changecollection(collection,id))
-}); 
 
 class AddList extends Component {
 	constructor(props){
@@ -30,26 +18,27 @@ class AddList extends Component {
 		this.showInput = this.showInput.bind(this);
 		this.closeInput = this.closeInput.bind(this);
 		this.inputtitle = this.inputtitle.bind(this);
-		this.addtitlefunc = this.addtitlefunc.bind(this);
+		// this.addtitlefunc = this.addtitlefunc.bind(this);
 		this.keypress = this.keypress.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
-	async addtitlefunc() {
+	// async addtitlefunc() {
 
-		if (this.state.title != "") {
+	// 	if (this.state.title != "") {
 
-			await this.props.addlist(this.state.title, this.props.boardId);
+	// 		await this.props.addlist(this.state.title, this.props.boardId);
 
-			var collection = {
-				contents: this.props.boardContents 
-			};
+	// 		var collection = {
+	// 			contents: this.props.boardContents 
+	// 		};
 
-			this.props.changecollection(collection,this.props.boardId);
-			// axios and save title to store
-		}
-		this.closeInput();
+	// 		this.props.changecollection(collection,this.props.boardId);
+	// 		// axios and save title to store
+	// 	}
+	// 	this.closeInput();
 
-	}
+	// }
 
 	inputtitle(e) {
 
@@ -58,12 +47,19 @@ class AddList extends Component {
 		});
 
 	}
-
+	handleClick(e) {
+		e.preventDefault();
+		this.props.addList(this.state.title);
+		this.setState({
+				show: false,
+				title: ""
+			})
+	}
 	keypress(e) {
 
 		const key = e.which || e.keycode;
 		if (key == 13) {
-			this.addtitlefunc();
+			this.props.addList(this.state.title);
 		}
 
 	}
@@ -94,7 +90,7 @@ class AddList extends Component {
 		const addtitle = 
 			<div>
 				<input className="board_addListDiv--input" type="text" placeholder="Enter list tilte..." onChange={this.inputtitle} onKeyPress={this.keypress} autoFocus/>
-				<button className="board_addListDiv--button" onClick={this.addtitlefunc}>Add List</button>
+				<button className="board_addListDiv--button" onClick={this.handleClick}>Add List</button>
 				<button className="board_addListDiv--button" style={{backgroundColor: "rgba(0,0,0,0)", color: "black"}} onClick={this.closeInput}>
 					<MDBIcon icon="times" />
 				</button>
@@ -110,5 +106,17 @@ class AddList extends Component {
 	}
 }
 
+const mapStateToProps = state => ({
+	// boardId: state.userboard.boardId,
+	// boardTitle: state.userboard.boardTitle,
+	// boardImgurl: state.userboard.boardImgurl,
+	// boardColor: state.userboard.boardColor,
+	// boardContents: state.userboard.boardContents
+});
 
-export default connect(mapStateToProps,mapDispatchProps)(AddList);
+const mapDispatchProps = (dispatch) => ({
+	addList: (title) => dispatch(addList(title))
+	//changecollection: (collection,id) => dispatch(changecollection(collection,id))
+}); 
+
+export default connect(null,mapDispatchProps)(AddList);

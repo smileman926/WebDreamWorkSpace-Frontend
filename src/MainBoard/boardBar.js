@@ -11,13 +11,14 @@ function BoardBar({title, isStarred, username}) {
 		const handleStar = () => {
 			setStar(!star)
 		}
+		console.log(star)
 		return (
 			<div className='boardbar_div'>
 				<div className='left'>
 					<button className="nav_btn" style={{fontWeight:"bolder",marginRight:"15px"}}>{title}</button>
 					<button className='nav_btn'>
 						{
-							isStarred
+							star
 							? <StarBorderIcon style={{ color: 'yellow' }} onClick={handleStar}/>
 							:<StarBorderIcon onClick={handleStar}/>
 						}

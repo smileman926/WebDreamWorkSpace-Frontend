@@ -3,20 +3,20 @@ import {render} from 'react-dom';
 import { MDBIcon } from "mdbreact";
 import { connect } from "react-redux";
 
-import addcontent from "../action/addcontent";
-import changecollection from "../action/changecollection";
+import {addContent} from "../../store/action/actions";
+//import changecollection from "../action/changecollection";
 
-const mapStateToProps = state => ({
-	boardId: state.userboard.boardId,
-	boardTitle: state.userboard.boardTitle,
-	boardImgurl: state.userboard.boardImgurl,
-	boardColor: state.userboard.boardColor,
-	boardContents: state.userboard.boardContents
-});
+// const mapStateToProps = state => ({
+// 	// boardId: state.userboard.boardId,
+// 	// boardTitle: state.userboard.boardTitle,
+// 	// boardImgurl: state.userboard.boardImgurl,
+// 	// boardColor: state.userboard.boardColor,
+// 	// boardContents: state.userboard.boardContents
+// });
 
 const mapDispatchProps = (dispatch) => ({
-	addcontent: (content,title) => dispatch(addcontent(content,title)),
-	changecollection: (collection,id) => dispatch(changecollection(collection,id))
+	addContent: (content,title) => dispatch(addContent(content,title)),
+	//changecollection: (collection,id) => dispatch(changecollection(collection,id))
 
 }); 
 
@@ -31,25 +31,26 @@ class AddContent extends Component {
 		this.showInput = this.showInput.bind(this);
 		this.closeInput = this.closeInput.bind(this);
 		this.inputcontent = this.inputcontent.bind(this);
-		this.addcontentfunc = this.addcontentfunc.bind(this);
+		//this.addcontentfunc = this.addcontentfunc.bind(this);
 		this.keypress = this.keypress.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
-	async addcontentfunc() {
+	// async addcontentfunc() {
 
-		if (this.state.content != "") {
+	// 	if (this.state.content != "") {
 			
-			await this.props.addcontent(this.state.content,this.props.title);
-			var collection = {
-				contents: this.props.boardContents 
-			};
+	// 		await this.props.addcontent(this.state.content,this.props.title);
+	// 		var collection = {
+	// 			contents: this.props.boardContents 
+	// 		};
 			
-			this.props.changecollection(collection,this.props.boardId);
-		}
-		this.closeInput();
-		this.props.parentrerender();
+	// 		this.props.changecollection(collection,this.props.boardId);
+	// 	}
+	// 	this.closeInput();
+	// 	this.props.parentrerender();
 
-	}
+	// }
 
 	inputcontent(e) {
 
@@ -58,18 +59,25 @@ class AddContent extends Component {
 		});
 
 	}
-
+	handleClick(e) {
+		e.preventDefault();
+		this.props.addContent(this.state.content, this.props.title)
+		this.setState({
+				show: false,
+				content: ""
+			})
+		 this.props.parentrerender()
+	}
 	keypress(e) {
 
 		const key = e.which || e.keyCode;
         if (key === 13) { //enter key
-            this.addcontentfunc();
+            this.addContent(this.state.content, this.props.title);
         }
 
 	}
 
 	showInput() {
-
 		if ( !this.state.show ) {
 			this.setState({
 				show: true
@@ -95,16 +103,16 @@ class AddContent extends Component {
 		const addcontent = 
 			<div>
 				<textarea className="board_addCardDiv--input" type="text" placeholder="Enter list tilte..." onChange={this.inputcontent} onKeyPress={this.keypress} autoFocus/>
-				<button className="board_addCardDiv--button" onClick={this.addcontentfunc}>Add Card</button>
+				<button className="board_addCardDiv--button" onClick={this.handleClick}>Add Card</button>
 				<button className="board_addCardDiv--button" style={{backgroundColor: "rgba(0,0,0,0)", color: "black"}} onClick={this.closeInput}>
-					<MDBIcon icon="times" />
+					<MDBIcon icon="times"/>
 				</button>
 			</div>;
 
 		return (
 				<div onClick = { this.showInput } className="board_addCardDiv">
 					{
-						this.state.show === false ? addlist:addcontent
+						this.state.show === false ? addlist: addcontent
 					}
 				</div>
 			);
@@ -112,4 +120,4 @@ class AddContent extends Component {
 }
 
 
-export default connect(mapStateToProps,mapDispatchProps)(AddContent);
+export default connect(null,mapDispatchProps)(AddContent);

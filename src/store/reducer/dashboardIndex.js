@@ -2,7 +2,8 @@ import * as actionTypes from "../action/actionTypes";
 
 const initState = {
 	toggleSidebar: false,
-	board: {}
+	board: {},
+	boardContents: []
 	}
 
  
@@ -19,6 +20,23 @@ export default function dashReducer(state=initState, action) {
 			return {
 				...state,			
 				board: action.payload
+			}
+		case actionTypes.ADD_LIST:
+			return {
+				...state,
+				boardContents: [...state.boardContents, action.payload]
+			}
+		case actionTypes.ADD_CONTENT:
+			const {boardContents} = state
+			for (var i in boardContents) {
+			     if (boardContents[i].title == action.title) {
+			        boardContents[i].contents.push(action.content);
+			        break; //Stop this loop, we found it!
+			     }
+			   }
+			return {
+				...state,
+
 			}
 		// case actionTypes.ADD_RECENT:
 		// 	if (state.recent.indexOf(action.payload)==-1) {

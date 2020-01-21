@@ -1,21 +1,22 @@
 import React, {Component} from "react";
 import {render} from "react-dom";
 import { connect } from "react-redux";
-import arrayMove from "array-move";
-import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import AddContent from "./addcontent";
-import ListContent from "./listContent";
+import ListContent from "./listcontent";
+// import arrayMove from "array-move";
+// import {SortableContainer, SortableElement} from 'react-sortable-hoc';
+// import Content from "./content";
 
+import "./list.css"
+// const mapStateToProps = state => ({
+// 	boardId: state.userboard.boardId,
+// 	boardTitle: state.userboard.boardTitle,
+// 	boardImgurl: state.userboard.boardImgurl,
+// 	boardColor: state.userboard.boardColor,
+// 	boardContents: state.userboard.boardContents
+// });
 
-const mapStateToProps = state => ({
-	boardId: state.userboard.boardId,
-	boardTitle: state.userboard.boardTitle,
-	boardImgurl: state.userboard.boardImgurl,
-	boardColor: state.userboard.boardColor,
-	boardContents: state.userboard.boardContents
-});
-
-// const mapDispatchProps = dispatch => ({
+// // const mapDispatchProps = dispatch => ({
 // 	changeListTitle: (title) => dispatch(changeListTitle(title, id))
 // })
 
@@ -23,64 +24,81 @@ const mapStateToProps = state => ({
 class List extends Component {
 	constructor(props){
 		super(props);
+
 		this.parentrerender = this.parentrerender.bind(this);
+
 		this.changeListTitle = this.changeListTitle.bind(this);
-		this.onSortEnd = this.onSortEnd.bind(this);
+		// this.onSortEnd = this.onSortEnd.bind(this);
 	}
-
-	onSortEnd({oldIndex, newIndex}){
-		console.log(oldIndex+"/"+newIndex)
+	parentrerender() {
+		this.forceUpdate();
 	}
-
 	changeListTitle(e) {
 		if (e.target.value !="") {
 
 		} 
 	}
 
-	parentrerender() {
-		this.forceUpdate();
-	}
-
 	render() {
-		const SortableItem = SortableElement(({content}) => <ListContent title={content} />);
 
-		const Content = SortableContainer(({tt}) => {
-				return (
-					<div 
-						className="list_div"
-						val =  {tt}
-					 >
-						<textarea className="list_title_div" onChange={this.changeListTitle} defaultValue={tt}/>
-							{
-								this.props.boardContents[tt].map((content,index) => {
-									if (content != "") {
-										return (
-											<SortableItem 
-												content={content}
-												index = {index}/>
-										);
-									}
-									
-								})
-							}
-						<AddContent key={this.props.boardId} title={tt} parentrerender = {this.parentrerender}/>
+
+		// const Content = ({title, contents}) => {
+		// 	console.log('title')
+		// 	console.log(title)
+		// 	console.log("contents")
+		// 	console.log(contents)
+		// 	console.log(contents.length)
+		// 		return (
+		// 			<div className="list_div">
+		// 				<textarea className="list_title_div" value={title}/>
+		// 				{
+							
+		// 					contents.map((content, index)=> {
+		// 						if (content != "") {
+		// 							return(
+		// 								 <ListContent title={content} key={index}/>
+		// 								)
+		// 						}
+		// 					})
+
+		// 				}
+		// 				<AddContent title={title}/>
+		// 			</div>
+		// 		);
+		// };
+
+		const Content = ({title, contents}) => {
+			console.log("title")
+			console.log(title)
+			console.log("contents")
+			console.log(contents)
+			return (
+				<div className="list_div">
+					<textarea className="list_title_div" value={title}/>
+						{
+							
+							contents.map((content, index)=> {
+								
+								if (content != "") {
+									return(
+										 <ListContent title={content} key={index}/>
+										)
+								}
+							})
+
+						}
+						<AddContent title={title} parentrerender = {this.parentrerender}/>
 					</div>
-				);
-		});
-
-		console.log(this.props.boardContents);
+				)
+		}
 		return (
 			<div className="list_container_div">
 				{
-					Object.keys(this.props.boardContents).map((key,index) => {
+					this.props.contents.map((key,index) => {
 						
-						if (key != "default") {
 							return (
-								<Content tt={key} index={index} onSortEnd={this.onSortEnd}/>
+								<Content title={key.title} contents={key.contents} key={index}/>
 							);
-						}
-					 
 					})
 				}
 			</div>
@@ -88,5 +106,7 @@ class List extends Component {
 	}
 }
 
-
+const mapStateToProps = state=> ({
+	contents: state.dashs.boardContents
+})
 export default connect(mapStateToProps,null)(List);

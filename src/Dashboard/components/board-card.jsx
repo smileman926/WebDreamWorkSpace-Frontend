@@ -71,7 +71,7 @@ function BoardCard(props) {
     
     return (
 
-        
+        <Link to="/main">
         <Card style={{backgroundImage: `url(${backgroundImageUrl})`, backgroundSize: 'cover'}} onClick={handleCard}>
             <CardTitle>{title}</CardTitle>
             <Mutation mutation={POST_MUTATION} variables={{_id, isStarred}}>
@@ -81,6 +81,7 @@ function BoardCard(props) {
             </Mutation>
             
         </Card>
+        </Link>
        
     )
 

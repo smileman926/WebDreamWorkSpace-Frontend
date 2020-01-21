@@ -2,7 +2,8 @@ import React, {useEffect} from "react";
 import SideBar from "../Dashboard/sideBar";
 import BoardBar from "./boardBar.js";
 import {connect} from "react-redux";
-
+import List from './components/list';
+import AddList from './components/addlist';
 
 
 function MainBoard(props) {
@@ -33,9 +34,10 @@ function MainBoard(props) {
 	 	<div style={{ height: `${height}px`, backgroundImage: `url(${backgroundImageUrl})`, backgroundSize: '100% 100%'}}>
 	 		<SideBar open={open} />
 		 	<BoardBar {...boardBarV} />
-		 	<h1>this a ppage</h1>
-		 	<h1>this a ppage</h1>
-		 	<h1>this a ppage</h1>
+		 	<div style={{display:"flex", alignItems: "top"}}>
+				<List/>
+				<AddList/>
+			</div>
 		</div>
 	 	)
 }

@@ -85,4 +85,21 @@ export const addInfo = info=> {
 		payload: info
 	}
 }
+export const addList = title=> {
+	const newobj = {
+		title: title,
+		contents: []
+	}
+	return {
+		type: actionTypes.ADD_LIST,
+		payload: newobj
+	}
+}
+export const addContent = (content, title)=> {
+	return {
+		type: actionTypes.ADD_CONTENT,
+		title: title,
+		content: content 
+	}
+}
 

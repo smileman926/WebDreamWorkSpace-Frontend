@@ -8,3 +8,5 @@ export const ADD_STAR = "ADD_STAR";
 export const REMOVE_RECENT = "REMOVE_RECENT";
 export const REMOVE_STAR = "REMOVE_STAR";
 export const ADD_INFO = "ADD_INFO";
+export const ADD_LIST = "ADD_LIST";
+export const ADD_CONTENT = "ADD_CONTENT";
