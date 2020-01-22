@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
-
+import {Link} from "react-router-dom";
 
 
 
@@ -21,13 +21,14 @@ class NavBar extends React.Component{
 	
 	render(){
 		const mark = this.props.userFirstLetter
+		const tokenUrl = localStorage.getItem("tokenUrl")
 		return (
 			<div>
 			<nav className="navbar navbar-expand-sm navbar-dark fixed-top">
 			  
 			  <ul className="navbar-nav">
 			    <li className="nav-item">
-			      <button className="nav_btn"><HomeOutlined style={{color: "white"}}/></button>
+			      <button className="nav_btn"><Link to={`/${tokenUrl}/dashboard`}><HomeOutlined style={{color: "white"}}/></Link></button>
 			    </li>
 			    <li className="nav-item">
 			      <button className="nav_btn" onClick={this.props.toggleSidebar}>boards</button>

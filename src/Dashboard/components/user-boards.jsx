@@ -12,12 +12,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { MDBBtn, MDBModal, MDBModalFooter, MDBNavLink } from 'mdbreact';
+import { MDBBtn, MDBModal, MDBModalFooter, MDBNavLink, MDBIcon } from 'mdbreact';
 import "./Modal.css";
-import { MDBIcon } from 'mdbreact';
 import Radio from '@material-ui/core/Radio';
 import { Mutation } from 'react-apollo';
 import { Link } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // import {addInfo} from "../../store/action/actions"
 
 const CardOverview = styled.div`
@@ -124,7 +124,7 @@ function UserBoard(props) {
                         >
                         {({ loading, error, data }) => {
                            
-                            if (loading) return 'Loading...';
+                            if (loading) return <CircularProgress />;
                             else if (error) return `Error! ${error.message}`;
                             else if(data.pureBoards.length==0) {
                                 return(<h3>No Data</h3>)
@@ -156,7 +156,7 @@ function UserBoard(props) {
                         >
                         {({ loading, error, data }) => {
                            
-                            if (loading) return 'Loading...';
+                            if (loading) return <CircularProgress />;
                             else if (error) return `Error! ${error.message}`;
                             else if(data.recentBoards.length==0) {
                                 return(<h3>No Data</h3>)
@@ -187,7 +187,7 @@ function UserBoard(props) {
                         >
                         {({ loading, error, data }) => {
                            
-                            if (loading) return 'Loading...';
+                            if (loading) return <CircularProgress />;
                             else if (error) return `Error! ${error.message}`;
                             else if(data.pureBoards.length==0) {
                                 return(<h3>No Data</h3>)
@@ -245,7 +245,7 @@ function UserBoard(props) {
                                         </div>
                                         <MDBModalFooter className="board-modal-footer">
                                             <Mutation mutation={POST_MUTATION} variables={{modalTitle, selectedValue}}>
-                                              {postMutation => <Link to="/main"><button className="btn btn-primary create-btn" onClick={postMutation} disabled={btnClass}>Create Board</button></Link>}
+                                              {postMutation => <button className="btn btn-primary create-btn" onClick={postMutation} disabled={btnClass}>Create Board</button>}
                                             </Mutation>
                                             
                                                 

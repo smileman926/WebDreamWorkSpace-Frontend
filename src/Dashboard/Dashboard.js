@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken"
 import TemplateCollection from './components/template-collection';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import PrivateRoute from "../Components/PrivateRoute";
-
+import MDContent from "./MDContent";
 import TemplateBoards from "./components/template-boards"
 
 class Dashboard extends React.Component {
@@ -43,6 +43,13 @@ class Dashboard extends React.Component {
 		                render={(props) => <TemplateCollection {...props} templateType={templateListItem} />}
 		                key={index} />
 		            )}
+		            {templateListItems.map((item, index)=>
+		            	<Route 
+		               	exact path={`/${item}/:id`} 
+		               	key={index} 
+		               	render={() => <MDContent numkey={index}/>} />
+	            	)}
+
 		           </Switch>
 		           
 			      </div>
