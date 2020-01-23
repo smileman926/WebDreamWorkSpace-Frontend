@@ -72,7 +72,7 @@ class AddContent extends Component {
 
 		const key = e.which || e.keyCode;
         if (key === 13) { //enter key
-            this.addContent(this.state.content, this.props.title);
+            this.props.addContent(this.state.content, this.props.title);
         }
 
 	}
