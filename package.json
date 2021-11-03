@@ -36,7 +36,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.4.1",
-    "validator": "^12.1.0"
+    "validator": "^13.7.0"
   },
   "scripts": {
     "start": "set PORT=3077 && react-scripts start",
